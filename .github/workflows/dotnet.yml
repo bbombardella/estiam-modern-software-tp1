@@ -1,4 +1,4 @@
-name: Build and test
+name: .NET development workflow
 
 on: [ push, pull_request ]
 
@@ -45,3 +45,16 @@ jobs:
 
       - name: Run Tests
         run: dotnet test --no-build --verbosity normal
+  lint:
+    name: 🧹 Lint / Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Project & dependencies
+        uses: ./.github/actions/setup-dotnet-action
+
+      - name: Format Check
+        run: dotnet format --verify-no-changes
