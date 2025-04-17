@@ -1,0 +1,14 @@
+name: Setup .NET Project
+description: Checkout, install .NET and restore dependencies
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+      shell: bash
